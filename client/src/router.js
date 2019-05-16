@@ -23,10 +23,5 @@ export default new Router({
       name: 'room',
       component: Room,
     },
-    {
-      path: '/lobby',
-      name: 'lobby',
-      component: Lobby,
-    },
   ],
 });
