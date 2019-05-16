@@ -65,44 +65,51 @@
     border-color: #BF2C3E;
     "
       >
-        <div style="border: 2px solid;"
-          v-for="(room, index) in rooms"
-          :key="index"
-          class="d-flex col-md-3"
-        >{{ room.name }} {{ room.players }}</div>
+        <form class="form-signin" @submit.prevent="registerRoom">
+          <label class="sr-only"></label>
+          <input type="text" class="form-control" v-model="newRoom" required>
+        </form>
+        <div class="mt-5 row justify-content-between">
+          <div class="col-lg-3 mx-2 mb-3" v-for="(room, index) in rooms" :key="index">
+            <div class="card text-center shadow-sm bg-white rounded" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">{{ room.name }}</h5>
+                <h4 class="card-text">{{ room.players.length}}/5</h4>
+                <a href="#" class="btn yellow mt-2 disabled" v-if="room.players.length === 5">Full</a>
+                <a href class="btn blue mt-2" v-else @click.prevent="join(room.id)">Join</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   data() {
     return {
-      name: localStorage.name,
-      rooms: [
-        {
-          name: 'Alpha',
-          players: 1,
-        },
-        {
-          name: 'Bravo',
-          players: 2,
-        },
-        {
-          name: 'Charlie',
-          players: 2,
-        },
-        {
-          name: 'Delta :)',
-          players: 3,
-        },
-        {
-          name: 'Echo',
-          players: 4,
-        },
-      ],
+      newRoom: "",
+      name: localStorage.username
     };
   },
+  created() {
+    this.$store.dispatch("getAllRoom");
+  },
+  computed: {
+    ...mapState(["rooms"])
+  },
+  methods: {
+    registerRoom() {
+      this.$store.dispatch("createRoom", this.newRoom);
+      localStorage.setItem("room", this.newRoom);
+    },
+    join(roomId) {
+      this.$store.dispatch("joinRoom", roomId);
+    }
+  }
 };
 </script>

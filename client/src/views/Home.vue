@@ -4,16 +4,16 @@
       class="navbar navbar-expand-lg navbar-light bg-light"
       style="background-color: #bf2c3e !important"
     >
-    <div v-for="index in 12" :key="index">
-      <img
-        style="height: 50px; width: 75px;"
-        src="https://vignette.wikia.nocookie.net/pokemon/images/b/b6/Diglett_XY.gif/revision/latest?cb=20150201051844"
-      >
-      <img
-        style="height: 50px; width: 75px;"
-        src="https://vignette.wikia.nocookie.net/pokemon/images/7/72/Dugtrio_XY.gif/revision/latest?cb=20150201051845"
-      >
-    </div>
+      <div v-for="index in 12" :key="index">
+        <img
+          style="height: 50px; width: 75px;"
+          src="https://vignette.wikia.nocookie.net/pokemon/images/b/b6/Diglett_XY.gif/revision/latest?cb=20150201051844"
+        >
+        <img
+          style="height: 50px; width: 75px;"
+          src="https://vignette.wikia.nocookie.net/pokemon/images/7/72/Dugtrio_XY.gif/revision/latest?cb=20150201051845"
+        >
+      </div>
       <button
         class="navbar-toggler"
         type="button"
@@ -40,9 +40,9 @@
     border-color: #BF2C3E;
     "
       >
-      <h2>Whack-A-Diglett</h2>
+        <h2>Whack-A-Diglett</h2>
         <img src="https://media0.giphy.com/media/WF995oMkoOpWw/giphy.gif">
-        <form @submit.prevent="submitName">
+        <form @submit.prevent="register">
           <br>
           <h3>Write your trainer name!</h3>
           <input v-model="name" type="text" placeholder="Your trainer name">
@@ -61,16 +61,18 @@
 export default {
   data() {
     return {
-      name: '',
-      image: 'https://media3.giphy.com/media/XHXTveQwggiWI/giphy.gif',
-      trainerImage: 'https://image.flaticon.com/icons/png/512/362/362003.png',
+      name: "",
+      image: "https://media3.giphy.com/media/XHXTveQwggiWI/giphy.gif",
+      trainerImage: "https://image.flaticon.com/icons/png/512/362/362003.png"
     };
   },
   methods: {
-    submitName() {
-      localStorage.name = this.name;
-      this.$router.push('/lobby');
-    },
-  },
+    register() {
+      localStorage.setItem("username", this.username);
+      this.$store.commit("register", this.username);
+      this.$store.dispatch("getAllRoom");
+      this.$router.push("/lobby");
+    }
+  }
 };
 </script>
