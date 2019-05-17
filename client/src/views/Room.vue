@@ -34,22 +34,23 @@
     </div>
     <div style="margin-left: 2rem; margin-right: 2rem; display: flex; justify-content: space-between;">
       <span>
-        <a href="#" @click.prevent="startstop" v-if="statusAdmin">START</a> {{startStatus}}<br>
+        <a href="#" @click.prevent="startstop" v-if="statusAdmin"><i>START</i></a> ({{startStatus}})<br><br>
         <span style="font-size: 1.8rem;">
           SCORE: {{myscore}}<br>
-          {{alert}}<br>
-          <a href="#" @click.prevent="timeleft = 45000">Reset time</a>
+          {{alert}}
         </span>
+        <br><br>
+        <a href="#" @click.prevent="timeleft = 45000">Reset timer</a>
       </span>
       <span style="text-align: center;">
-        <span style="font-size: 2.8rem;">
+        <span style="font-size: 2.8rem; color: #f9dc1d;">
           {{formatTimeLeft}} seconds
         </span>
         <div>
-          <!-- <span style="padding: 1rem;" v-for="(value, name, index) in thisRoom.players" v-bind:key="item.id">
-              Player {{ index }}: {{ name }}: {{ value }}
-          </span> -->
-          {{thisRoom.players}}
+          <div style="font-size: 1.2rem; margin-top: 0.4rem; margin-bottom: 0.4rem; color: #ccc;">Scoreboard:</div>
+          <div style="padding: 0.2rem 0.9rem; border-top: 1px solid #ccc;" v-for="(player, index) in thisRoom.players" v-bind:key="player.name">
+              Player {{index + 1}}: {{player.name}}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;SCORE: {{player.score}}
+          </div>
         </div>
       </span>
       <span style="text-align: right;">
@@ -156,14 +157,14 @@ export default {
     },
   },
   computed: {
-    startStatus: function() {
+    startStatus: function () {
       if (this.start) {
         return "Game Started"
       } else {
         return "Not yet Started"
       }
     },
-    formatTimeLeft: function() {
+    formatTimeLeft: function () {
       return (this.timeleft / 1000).toFixed(1)
     },
     pos1: function () {
