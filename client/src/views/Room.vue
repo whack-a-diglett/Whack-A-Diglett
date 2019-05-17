@@ -91,12 +91,12 @@
 </template>
 
 <script>
-import db from "@/api/api";
+import db from '@/api/api';
 
-import d3 from "@/components/d3.vue";
-import d2 from "@/components/d2.vue";
-import d1 from "@/components/d1.vue";
-import d0 from "@/components/nd.vue";
+import d3 from '@/components/d3.vue';
+import d2 from '@/components/d2.vue';
+import d1 from '@/components/d1.vue';
+import d0 from '@/components/nd.vue';
 
 let refresh;
 let countdown;
@@ -106,25 +106,25 @@ export default {
     return {
       thisRoom: {},
       myPoint: 0,
-      position: "none",
+      position: 'none',
       elevation: 0,
       myscore: 0,
       start: false,
-      timeleft: 30000,
-      alert: "",
-      statusAdmin: null
+      timeleft: 45000,
+      alert: '',
+      statusAdmin: null,
     };
   },
   components: {
     d3,
     d2,
     d1,
-    d0
+    d0,
   },
   created() {
-    db.collection("room")
+    db.collection('room')
       .doc(this.$route.params.id)
-      .onSnapshot(doc => {
+      .onSnapshot((doc) => {
         console.log(doc.data());
         this.thisRoom = doc.data();
         if (this.thisRoom.players[0].name === localStorage.username) {
@@ -141,7 +141,7 @@ export default {
           }, 500);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   },
@@ -149,132 +149,132 @@ export default {
     hit(num) {
       console.log(`${num}  |  ${this.position}`);
       if (num === this.position) {
-        var audio = new Audio("/hit.mp3");
+        var audio = new Audio('/hit.mp3');
         audio.play();
         console.log(`Hit pos ${num}`);
         this.myscore += 1;
-        this.alert = "Hit !!!";
+        this.alert = 'Hit !!!';
         setTimeout(() => {
-          this.alert = "";
+          this.alert = '';
         }, 500);
 
         const newPlayers = this.thisRoom.players;
-        newPlayers.find(element => {
+        newPlayers.find((element) => {
           if (element.name === localStorage.username) {
             element.score = this.myscore;
           }
         });
 
-        db.collection("room")
+        db.collection('room')
           .doc(this.$route.params.id)
           .update({
-            players: newPlayers
+            players: newPlayers,
           })
           .then(() => {
-            console.log("success ");
+            console.log('success ');
           })
-          .catch(err => {
+          .catch((err) => {
             console.log(err);
           });
       } else {
-        var audio = new Audio("/miss.mp3");
+        var audio = new Audio('/miss.mp3');
         audio.play();
       }
     },
 
     startstop() {
-      db.collection("room")
+      db.collection('room')
         .doc(this.$route.params.id)
         .update({
-          status: true
+          status: true,
         })
         .then();
     },
   },
   computed: {
-    startStatus: function () {
+    startStatus() {
       if (this.start) {
-        return "Game Started!"
-      } else {
-        return "Not yet Started"
+        return 'Game Started!';
       }
-      return "Not yet Started";
+      return 'Not yet Started';
+
+      return 'Not yet Started';
     },
-    formatTimeLeft: function () {
-      return (this.timeleft / 1000).toFixed(1)
+    formatTimeLeft() {
+      return (this.timeleft / 1000).toFixed(1);
     },
-    pos1: function () {
+    pos1() {
       if (this.position === 1) {
-        return 'd' + this.elevation;
+        return `d${this.elevation}`;
       }
-      return "d0";
+      return 'd0';
     },
-    pos2: function () {
+    pos2() {
       if (this.position === 2) {
-        return 'd' + this.elevation;
+        return `d${this.elevation}`;
       }
-      return "d0";
+      return 'd0';
     },
-    pos3: function () {
+    pos3() {
       if (this.position === 3) {
-        return 'd' + this.elevation;
+        return `d${this.elevation}`;
       }
-      return "d0";
+      return 'd0';
     },
-    pos4: function () {
+    pos4() {
       if (this.position === 4) {
-        return 'd' + this.elevation;
+        return `d${this.elevation}`;
       }
-      return "d0";
+      return 'd0';
     },
-    pos5: function () {
+    pos5() {
       if (this.position === 5) {
-        return 'd' + this.elevation;
+        return `d${this.elevation}`;
       }
-      return "d0";
+      return 'd0';
     },
-    pos6: function () {
+    pos6() {
       if (this.position === 6) {
-        return 'd' + this.elevation;
+        return `d${this.elevation}`;
       }
-      return "d0";
+      return 'd0';
     },
-    pos7: function () {
+    pos7() {
       if (this.position === 7) {
-        return 'd' + this.elevation;
+        return `d${this.elevation}`;
       }
-      return "d0";
+      return 'd0';
     },
-    pos8: function () {
+    pos8() {
       if (this.position === 8) {
-        return 'd' + this.elevation;
+        return `d${this.elevation}`;
       }
-      return "d0";
+      return 'd0';
     },
-    pos9: function () {
+    pos9() {
       if (this.position === 9) {
-        return 'd' + this.elevation;
+        return `d${this.elevation}`;
       }
-      return "d0";
+      return 'd0';
     },
-    pos10: function () {
+    pos10() {
       if (this.position === 10) {
-        return 'd' + this.elevation;
+        return `d${this.elevation}`;
       }
-      return "d0";
+      return 'd0';
     },
-    pos11: function () {
+    pos11() {
       if (this.position === 11) {
-        return 'd' + this.elevation;
+        return `d${this.elevation}`;
       }
-      return "d0";
+      return 'd0';
     },
-    pos12: function () {
+    pos12() {
       if (this.position === 12) {
-        return 'd' + this.elevation;
+        return `d${this.elevation}`;
       }
-      return "d0";
-    }
+      return 'd0';
+    },
   },
   watch: {
     position() {
@@ -297,15 +297,15 @@ export default {
         this.elevation = 0;
       }, 1000);
     },
-    timeleft: function() {
+    timeleft() {
       if (this.timeleft <= 0) {
         this.start = false;
         clearInterval(refresh);
         clearInterval(countdown);
         this.$router.push(`/room/${this.$route.params.id}/result`);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

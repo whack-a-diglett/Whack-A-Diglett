@@ -51,7 +51,7 @@
         >
         <br>
         <button class="btn btn-danger" disabled>Trainer {{ name }}</button>
-        
+
         <form class="form-signin" @submit.prevent="registerRoom">
           <label class="sr-only"></label>
           <br>
