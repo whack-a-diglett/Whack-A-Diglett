@@ -68,8 +68,8 @@ export default {
   },
   methods: {
     register() {
-      localStorage.setItem("username", this.username);
-      this.$store.commit("register", this.username);
+      localStorage.setItem("username", this.name);
+      this.$store.commit("register", this.name);
       this.$store.dispatch("getAllRoom");
       this.$router.push("/lobby");
     }

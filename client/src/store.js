@@ -8,7 +8,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     rooms: [],
-    currentRoomId: '',
+    currentRoom: {},
     currentPlayer: '',
     myRoom: {},
   },
@@ -23,6 +23,10 @@ export default new Vuex.Store({
         state.myRoom = room;
       }
     },
+    setCurrentRoom(state, payload){
+      state.currentRoom = payload
+    },
+
   },
   actions: {
     getAllRoom(context) {
@@ -51,14 +55,15 @@ export default new Vuex.Store({
         })
         .then((docs) => {
           localStorage.setItem('idRoom', docs._key.path.segments[1]);
-          router.push(`/game/${docs._key.path.segments[1]}`)
-          context.dispatch('getAllRoom');
+          router.push(`/room/${docs._key.path.segments[1]}`)
         })
         .catch((err) => {
           console.log(err);
         });
     },
     joinRoom(context, payload) {
+      console.log(context.state.currentPlayer);
+      
       let newPlayers = [];
       const room = context.state.rooms.find(room => room.id === payload);
       newPlayers = room.players;
@@ -69,8 +74,10 @@ export default new Vuex.Store({
           players: newPlayers,
         })
         .then((docs) => {
-          console.log("store docs ", room);
-          router.push(`/game/${payload}`);
+          console.log("store docs ", );
+          localStorage.setItem('roomId', room.id)
+          context.commit('setCurrentRoom', room);
+          router.push(`/room/${payload}`);
         })
         .catch((err) => {
           console.log(err);
