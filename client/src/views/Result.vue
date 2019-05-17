@@ -50,25 +50,32 @@ background-size: cover;
 
 
 <script>
-import db from '@/api/api';
+import db from "@/api/api";
 
 export default {
   data() {
     return {
-      thisRoom: {},
+      thisRoom: {}
     };
   },
   created() {
-    db.collection('room')
+    db.collection("room")
       .doc(this.$route.params.id)
-      .onSnapshot((doc) => {
+      .onSnapshot(doc => {
         console.log(doc.data());
         this.thisRoom = doc.data();
         this.thisRoom.players.sort((a, b) => (a.score > b.score ? -1 : 1));
+        if (localStorage.username === this.thisRoom.players[0].name) {
+          var audio = new Audio("/win.mp3");
+          audio.play();
+        } else {
+          var audio = new Audio("/lose.mp3");
+          audio.play();
+        }
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
-  },
+  }
 };
 </script>
