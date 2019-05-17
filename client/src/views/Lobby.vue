@@ -42,7 +42,8 @@
     border-color: #BF2C3E;
     "
       >
-        <h3>Room, I choose you!</h3>
+        <h3>"Room, I choose you!"</h3>
+        <br>
         <img
           height="100px;"
           width="100px;"
@@ -50,6 +51,20 @@
         >
         <br>
         <button class="btn btn-danger" disabled>Trainer {{ name }}</button>
+        
+        <form class="form-signin" @submit.prevent="registerRoom">
+          <label class="sr-only"></label>
+          <br>
+          <input
+            style="margin: 0 auto; width: 300px;"
+            type="text"
+            class="form-control"
+            v-model="newRoom"
+            required
+          >
+          <br>
+          <button class="btn btn-danger" type="submit">Confirm new room</button>
+        </form>
       </div>
     </div>
 
@@ -65,14 +80,10 @@
     border-color: #BF2C3E;
     "
       >
-        <form class="form-signin" @submit.prevent="registerRoom">
-          <label class="sr-only"></label>
-          <input type="text" class="form-control" v-model="newRoom" required>
-        </form>
         <div class="mt-5 row justify-content-between">
-          <div class="col-lg-3 mx-2 mb-3" v-for="(room, index) in rooms" :key="index">
+          <div class="col-lg-3 mx-2 mb-3" v-for="(room, index) in rooms" :key="index" style="padding: 0;" >
             <div class="card text-center shadow-sm bg-white rounded" style="width: 18rem;">
-              <div class="card-body">
+              <div class="card-body" style="background-color: rgb(232,123,133);">
                 <h5 class="card-title">{{ room.name }}</h5>
                 <h4 class="card-text">{{ room.players.length}}/5</h4>
                 <a href="#" class="btn yellow mt-2 disabled"
