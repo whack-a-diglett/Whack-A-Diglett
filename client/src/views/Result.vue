@@ -2,19 +2,18 @@
   <div>
     <div
       style="
-    color:black;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    margin: 250px;
-    border: 2px solid;
-    background-color:white ;
-    border-radius: 15px;
-    border-color: #BF2C3E;
-    background-image: url(https://media.giphy.com/media/120ErahsQyf1q8/giphy.gif);
-background-repeat: no-repeat;
-background-size: cover;
-
-    "
+      color:black;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      margin: 250px;
+      border: 2px solid;
+      background-color:white ;
+      border-radius: 15px;
+      border-color: #BF2C3E;
+      background-image: url(https://media.giphy.com/media/120ErahsQyf1q8/giphy.gif);
+      background-repeat: no-repeat;
+      background-size: cover;
+      "
     >
       <img src>
       <div style="text-align: center;">
@@ -45,7 +44,7 @@ background-size: cover;
           </div>
         </div>
         <br>
-        <button class="btn btn-danger" href="#" @click="goHome">To Homepage</button>
+        <button style="margin: 0.8rem;" class="btn btn-danger" href="#" @click="goHome">To Homepage</button>
       </div>
     </div>
   </div>
