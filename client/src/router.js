@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from './views/Home.vue';
 import Lobby from './views/Lobby.vue';
 import Room from './views/Room.vue';
+import Result from './views/Result.vue';
 
 Vue.use(Router);
 
@@ -22,6 +23,10 @@ export default new Router({
       path: '/room/:id',
       name: 'room',
       component: Room,
+    }, {
+      path: '/room/:id/result',
+      name: 'result',
+      component: Result,
     },
   ],
 });
