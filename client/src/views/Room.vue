@@ -39,15 +39,15 @@
           SCORE: {{myscore}}<br>
           {{alert}}
         </span>
-        <br><br>
-        <a href="#" @click.prevent="timeleft = 45000">Reset timer</a>
+        <br><br><br>
+        <a href="#" style="color: #ff180c;" @click.prevent="timeleft = 45000">Reset timer</a>
       </span>
       <span style="text-align: center;">
         <span style="font-size: 2.8rem; color: #f9dc1d;">
           {{formatTimeLeft}} seconds
         </span>
         <div>
-          <div style="font-size: 1.2rem; margin-top: 0.4rem; margin-bottom: 0.4rem; color: #ccc;">Scoreboard:</div>
+          <div style="font-size: 1.2rem; margin-top: 0.4rem; margin-bottom: 0.4rem;">Scores:</div>
           <div style="padding: 0.2rem 0.9rem; border-top: 1px solid #ccc;" v-for="(player, index) in thisRoom.players" v-bind:key="player.name">
               Player {{index + 1}}: {{player.name}}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;SCORE: {{player.score}}
           </div>
@@ -55,7 +55,7 @@
       </span>
       <span style="text-align: right;">
         TARGET:<br>
-        <span style="font-size: 1.5rem;">
+        <span style="font-size: 1.2rem; color: #ccc;">
           Position: {{position}}<br>
           Elevation: {{elevation}}
         </span>
@@ -159,7 +159,7 @@ export default {
   computed: {
     startStatus: function () {
       if (this.start) {
-        return "Game Started"
+        return "Game Started!"
       } else {
         return "Not yet Started"
       }
