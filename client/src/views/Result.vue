@@ -44,6 +44,8 @@ background-size: cover;
             <br>
           </div>
         </div>
+        <br>
+        <button class="btn btn-danger" href="#" @click="goHome">To Homepage</button>
       </div>
     </div>
   </div>
@@ -80,7 +82,11 @@ export default {
       .catch((err) => {
         console.log(err);
       });
-    setTimeout(() => {}, 10000);
   },
+  methods: {
+    goHome() {
+      this.$router.push('/lobby')
+    }
+  }
 };
 </script>

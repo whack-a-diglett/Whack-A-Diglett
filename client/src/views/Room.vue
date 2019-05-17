@@ -100,6 +100,7 @@ import d0 from '@/components/nd.vue';
 
 let refresh;
 let countdown;
+let onlyOnce = false;
 
 export default {
   data() {
@@ -130,8 +131,10 @@ export default {
         if (this.thisRoom.players[0].name === localStorage.username) {
           this.statusAdmin = true;
         }
-        if (this.thisRoom.status) {
+        if (this.thisRoom.status && (!onlyOnce)) {
           this.start = true;
+          onlyOnce = true;
+          
           refresh = setInterval(() => {
             this.position = Math.ceil(Math.random() * 12);
           }, 1500);
