@@ -52,6 +52,7 @@ export default new Vuex.Store({
           players: [{ name: nameUser, score: 0 }],
           winner: '',
           createdAt: new Date(),
+          status: false,
         })
         .then((docs) => {
           localStorage.setItem('idRoom', docs._key.path.segments[1]);
