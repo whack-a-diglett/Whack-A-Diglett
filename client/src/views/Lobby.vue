@@ -82,10 +82,11 @@
       >
         <div class="mt-5 row justify-content-between">
           <div class="col-lg-3 mx-2 mb-3" v-for="(room, index) in rooms" :key="index" style="padding: 0;" >
-            <div class="card text-center shadow-sm bg-white rounded" style="width: 18rem;">
+            <div class="card text-center shadow-sm bg-white rounded" style="width: 18rem; height: 10rem;" >
               <div class="card-body" style="background-color: rgb(232,123,133);">
+                <br v-if="room.winner!=''"  >
                 <h5 class="card-title">{{ room.name }}</h5>
-                <h5 class="card-title" v-if="room.winner!=''">the Winner : {{ room.winner }}</h5>
+                <h5 class="card-title" v-if="room.winner!=''">The Winner : {{ room.winner }}</h5>
                 <div v-else>
                   <h4 class="card-text" >{{ room.players.length}}/5</h4>
                   <a href="#" class="btn yellow mt-2 disabled"

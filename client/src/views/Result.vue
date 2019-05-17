@@ -52,39 +52,50 @@
 
 
 <script>
-import db from '@/api/api';
+import db from "@/api/api";
 
 export default {
   data() {
     return {
       thisRoom: {},
-      announcement: '',
+      announcement: "",
+      winner: ""
     };
   },
   created() {
-    db.collection('room')
+    db.collection("room")
       .doc(this.$route.params.id)
-      .onSnapshot((doc) => {
+      .onSnapshot(doc => {
         console.log(doc.data());
         this.thisRoom = doc.data();
         this.thisRoom.players.sort((a, b) => (a.score > b.score ? -1 : 1));
+        this.winner = this.thisRoom.players[0].name;
         if (localStorage.username === this.thisRoom.players[0].name) {
-          this.announcement = 'Horey! You won!!!';
-          var audio = new Audio('/win.mp3');
+          this.announcement = "Horey! You won!!!";
+          var audio = new Audio("/win.mp3");
           audio.play();
         } else {
           this.announcement = "You lost :'(";
-          var audio = new Audio('/lose.mp3');
+          var audio = new Audio("/lose.mp3");
           audio.play();
         }
+        db.collection("room")
+          .doc(this.$route.params.id)
+          .update({
+            winner: this.winner
+          })
+          .then(() => {})
+          .catch(err => {
+            console.log(err);
+          });
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   },
   methods: {
     goHome() {
-      this.$router.push('/lobby')
+      this.$router.push("/lobby");
     }
   }
 };
