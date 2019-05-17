@@ -7,43 +7,49 @@
 </template>
 
 <script>
-import db from "@/api/api";
+import db from '@/api/api';
 
 export default {
   data() {
     return {
       thisRoom: {},
-      myPoint: 0
+      myPoint: 0,
     };
   },
   created() {
-    db.collection("room")
+    db.collection('room')
       .doc(this.$route.params.id)
-      .onSnapshot(doc => {
+      .onSnapshot((doc) => {
         console.log(doc.data());
         this.thisRoom = doc.data();
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   },
   methods: {
     score() {
-      console.log(this.$route.params.id,"<<<<<<<<<<<<<<<<<<<");
-      
       this.myPoint += 1;
-      db.collection("room")
+
+      const newPlayers = this.thisRoom.players;
+      newPlayers.find((element) => {
+        if (element.name === localStorage.username) {
+          element.score = this.myPoint;
+        }
+      });
+
+      db.collection('room')
         .doc(this.$route.params.id)
         .update({
-          players: { name: localStorage.username, score: this.myPoint }
+          players: newPlayers,
         })
         .then(() => {
-          console.log("success ");
+          console.log('success ');
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
-    }
-  }
+    },
+  },
 };
 </script>

@@ -61,18 +61,18 @@
 export default {
   data() {
     return {
-      name: "",
-      image: "https://media3.giphy.com/media/XHXTveQwggiWI/giphy.gif",
-      trainerImage: "https://image.flaticon.com/icons/png/512/362/362003.png"
+      name: '',
+      image: 'https://media3.giphy.com/media/XHXTveQwggiWI/giphy.gif',
+      trainerImage: 'https://image.flaticon.com/icons/png/512/362/362003.png',
     };
   },
   methods: {
     register() {
-      localStorage.setItem("username", this.name);
-      this.$store.commit("register", this.name);
-      this.$store.dispatch("getAllRoom");
-      this.$router.push("/lobby");
-    }
-  }
+      localStorage.setItem('username', this.name);
+      this.$store.commit('register', this.name);
+      this.$store.dispatch('getAllRoom');
+      this.$router.push('/lobby');
+    },
+  },
 };
 </script>

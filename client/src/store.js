@@ -23,8 +23,8 @@ export default new Vuex.Store({
         state.myRoom = room;
       }
     },
-    setCurrentRoom(state, payload){
-      state.currentRoom = payload
+    setCurrentRoom(state, payload) {
+      state.currentRoom = payload;
     },
 
   },
@@ -45,7 +45,7 @@ export default new Vuex.Store({
         });
     },
     createRoom(context, payload) {
-      let nameUser = localStorage.getItem('username')
+      const nameUser = localStorage.getItem('username');
       db.collection('room')
         .add({
           name: payload,
@@ -55,7 +55,7 @@ export default new Vuex.Store({
         })
         .then((docs) => {
           localStorage.setItem('idRoom', docs._key.path.segments[1]);
-          router.push(`/room/${docs._key.path.segments[1]}`)
+          router.push(`/room/${docs._key.path.segments[1]}`);
         })
         .catch((err) => {
           console.log(err);
@@ -63,7 +63,7 @@ export default new Vuex.Store({
     },
     joinRoom(context, payload) {
       console.log(context.state.currentPlayer);
-      
+
       let newPlayers = [];
       const room = context.state.rooms.find(room => room.id === payload);
       newPlayers = room.players;
@@ -73,15 +73,15 @@ export default new Vuex.Store({
         .update({
           players: newPlayers,
         })
-        .then((docs) => {
-          console.log("store docs ", );
-          localStorage.setItem('roomId', room.id)
+        .then(() => {
+          console.log('store docs ');
+          localStorage.setItem('roomId', room.id);
           context.commit('setCurrentRoom', room);
           router.push(`/room/${payload}`);
         })
         .catch((err) => {
           console.log(err);
         });
-    }
+    },
   },
 });

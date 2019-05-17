@@ -75,7 +75,8 @@
               <div class="card-body">
                 <h5 class="card-title">{{ room.name }}</h5>
                 <h4 class="card-text">{{ room.players.length}}/5</h4>
-                <a href="#" class="btn yellow mt-2 disabled" v-if="room.players.length === 5">Full</a>
+                <a href="#" class="btn yellow mt-2 disabled"
+                v-if="room.players.length === 5">Full</a>
                 <a href class="btn blue mt-2" v-else @click.prevent="join(room.id)">Join</a>
               </div>
             </div>
@@ -87,29 +88,29 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex';
 
 export default {
   data() {
     return {
-      newRoom: "",
-      name: localStorage.username
+      newRoom: '',
+      name: localStorage.username,
     };
   },
   created() {
-    this.$store.dispatch("getAllRoom");
+    this.$store.dispatch('getAllRoom');
   },
   computed: {
-    ...mapState(["rooms"])
+    ...mapState(['rooms']),
   },
   methods: {
     registerRoom() {
-      this.$store.dispatch("createRoom", this.newRoom);
-      localStorage.setItem("room", this.newRoom);
+      this.$store.dispatch('createRoom', this.newRoom);
+      localStorage.setItem('room', this.newRoom);
     },
     join(roomId) {
-      this.$store.dispatch("joinRoom", roomId);
-    }
-  }
+      this.$store.dispatch('joinRoom', roomId);
+    },
+  },
 };
 </script>
