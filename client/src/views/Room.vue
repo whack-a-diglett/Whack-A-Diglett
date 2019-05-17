@@ -45,9 +45,12 @@
         <span style="font-size: 2.8rem;">
           {{formatTimeLeft}} seconds
         </span>
-        <span>
+        <div>
+          <!-- <span style="padding: 1rem;" v-for="(value, name, index) in thisRoom.players" v-bind:key="item.id">
+              Player {{ index }}: {{ name }}: {{ value }}
+          </span> -->
           {{thisRoom.players}}
-        </span>
+        </div>
       </span>
       <span style="text-align: right;">
         TARGET:<br>
@@ -57,7 +60,6 @@
         </span>
       </span>
     </div>
-    <!-- <button type="submit" @click.prevent="score">SCORE</button> -->
   </div>
 </template>
 
@@ -151,19 +153,6 @@ export default {
           status: true
         })
         .then();
-      // this.start = !this.start
-      // if(this.start) {
-      //   refresh = setInterval(() => {
-      //     this.position = Math.ceil(Math.random()*12)
-      //   }, 1500)
-
-      //   countdown = setInterval(() => {
-      //     this.timeleft -= 500
-      //   }, 500)
-      // } else {
-      //   clearInterval(refresh)
-      //   clearInterval(countdown)
-      // }
     },
   },
   computed: {
@@ -178,73 +167,73 @@ export default {
       return (this.timeleft / 1000).toFixed(1)
     },
     pos1: function () {
-      if(this.position === 1) {
+      if (this.position === 1) {
         return 'd' + this.elevation;
       }
       return 'd0';
     },
     pos2: function () {
-      if(this.position === 2) {
+      if (this.position === 2) {
         return 'd' + this.elevation;
       }
       return 'd0';
     },
     pos3: function () {
-      if(this.position === 3) {
+      if (this.position === 3) {
         return 'd' + this.elevation;
       }
       return 'd0';
     },
     pos4: function () {
-      if(this.position === 4) {
+      if (this.position === 4) {
         return 'd' + this.elevation;
       }
       return 'd0';
     },
     pos5: function () {
-      if(this.position === 5) {
+      if (this.position === 5) {
         return 'd' + this.elevation;
       }
       return 'd0';
     },
     pos6: function () {
-      if(this.position === 6) {
+      if (this.position === 6) {
         return 'd' + this.elevation;
       }
       return 'd0';
     },
     pos7: function () {
-      if(this.position === 7) {
+      if (this.position === 7) {
         return 'd' + this.elevation;
       }
       return 'd0';
     },
     pos8: function () {
-      if(this.position === 8) {
+      if (this.position === 8) {
         return 'd' + this.elevation;
       }
       return 'd0';
     },
     pos9: function () {
-      if(this.position === 9) {
+      if (this.position === 9) {
         return 'd' + this.elevation;
       }
       return 'd0';
     },
     pos10: function () {
-      if(this.position === 10) {
+      if (this.position === 10) {
         return 'd' + this.elevation;
       }
       return 'd0';
     },
     pos11: function () {
-      if(this.position === 11) {
+      if (this.position === 11) {
         return 'd' + this.elevation;
       }
       return 'd0';
     },
     pos12: function () {
-      if(this.position === 12) {
+      if (this.position === 12) {
         return 'd' + this.elevation;
       }
       return 'd0';
@@ -272,11 +261,11 @@ export default {
       }, 1000);
     },
     timeleft: function() {
-      if(this.timeleft <= 0) {
+      if (this.timeleft <= 0) {
         this.start = false;
         clearInterval(refresh);
         clearInterval(countdown);
-        this.$router.push(`/room/${this.$route.params.id}/result`)
+        this.$router.push(`/room/${this.$route.params.id}/result`);
       }
     },
   },
