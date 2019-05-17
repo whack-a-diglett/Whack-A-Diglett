@@ -5,14 +5,14 @@
 <script>
 export default {
   props: [],
-  data: function() {
+  data() {
     return {
       text: `<br>&nbsp;&nbsp;&nbsp;,......<br>
         &nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╲<br>
         &nbsp;&nbsp;│|&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;│<br>
         &nbsp;&nbsp;⊂⊃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│<br>
         ~^~^~^~~^~^~~`,
-    }
+    };
   },
 };
 </script>

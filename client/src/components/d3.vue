@@ -5,7 +5,7 @@
 <script>
 export default {
   props: [],
-  data: function() {
+  data() {
     return {
       text: `&nbsp;&nbsp;&nbsp;,......<br>
         &nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;╲<br>
@@ -13,7 +13,7 @@ export default {
         &nbsp;&nbsp;⊂⊃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│<br>
         &nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│<br>
         ~^~^~^~~^~^~~`,
-    }
+    };
   },
 };
 </script>

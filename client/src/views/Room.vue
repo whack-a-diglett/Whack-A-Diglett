@@ -72,20 +72,20 @@ import d2 from '@/components/d2.vue';
 import d1 from '@/components/d1.vue';
 import d0 from '@/components/nd.vue';
 
-let refresh
-let countdown
+let refresh;
+let countdown;
 
 export default {
   data() {
     return {
       thisRoom: {},
       myPoint: 0,
-      position: "none",
+      position: 'none',
       elevation: 0,
       myscore: 0,
       start: false,
       timeleft: 30000,
-      alert: "",
+      alert: '',
       statusAdmin: null,
     };
   },
@@ -98,18 +98,18 @@ export default {
       .onSnapshot((doc) => {
         console.log(doc.data());
         this.thisRoom = doc.data();
-        if(this.thisRoom.players[0].name === localStorage.username) {
+        if (this.thisRoom.players[0].name === localStorage.username) {
           this.statusAdmin = true;
         }
-        if(this.thisRoom.status) {
-          this.start = true
+        if (this.thisRoom.status) {
+          this.start = true;
           refresh = setInterval(() => {
-            this.position = Math.ceil(Math.random()*12)
-          }, 1500)
+            this.position = Math.ceil(Math.random() * 12);
+          }, 1500);
 
           countdown = setInterval(() => {
-            this.timeleft -= 500
-          }, 500)
+            this.timeleft -= 500;
+          }, 500);
         }
       })
       .catch((err) => {
@@ -118,14 +118,14 @@ export default {
   },
   methods: {
     hit(num) {
-      console.log(`${num}  |  ${this.position}`)
-      if(num === this.position) {
+      console.log(`${num}  |  ${this.position}`);
+      if (num === this.position) {
         console.log(`Hit pos ${num}`);
         this.myscore += 1;
-        this.alert = "Hit !!!"
+        this.alert = 'Hit !!!';
         setTimeout(() => {
-          this.alert = ""
-        }, 500)
+          this.alert = '';
+        }, 500);
 
         const newPlayers = this.thisRoom.players;
         newPlayers.find((element) => {
@@ -151,7 +151,7 @@ export default {
       db.collection('room')
         .doc(this.$route.params.id)
         .update({
-          status: true
+          status: true,
         })
         .then();
     },
@@ -163,6 +163,7 @@ export default {
       } else {
         return "Not yet Started"
       }
+      return 'Not yet Started';
     },
     formatTimeLeft: function () {
       return (this.timeleft / 1000).toFixed(1)
@@ -238,10 +239,10 @@ export default {
         return 'd' + this.elevation;
       }
       return 'd0';
-    }
+    },
   },
   watch: {
-    position: function() {
+    position() {
       setTimeout(() => {
         this.elevation = 1;
       }, 480);
